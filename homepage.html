@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Dashboard – Hamara Suvidha Kendra</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{background:#f3f6fb;color:#1e1e1e}
+
+/* Layout */
+.wrapper{display:flex;min-height:100vh}
+
+/* Sidebar */
+.sidebar{
+width:260px;
+background:linear-gradient(180deg,#ff9933,#ffffff,#138808);
+padding:15px 0;
+box-shadow:3px 0 12px rgba(0,0,0,.2);
+display:flex;
+flex-direction:column;
+}
+
+/* Brand */
+.brand{
+text-align:center;
+font-weight:bold;
+padding:15px;
+font-size:18px;
+color:#000;
+border-bottom:1px solid rgba(0,0,0,.15);
+margin-bottom:10px;
+}
+
+/* Menu */
+.menu{flex:1}
+.menu-item{
+cursor:pointer;
+padding:12px 20px;
+font-weight:bold;
+display:flex;
+justify-content:space-between;
+align-items:center;
+color:#0a2a66;
+transition:.3s;
+border-radius:8px;
+margin:4px 10px;
+}
+.menu-item:hover{background:rgba(0,0,0,.05)}
+
+.dropdown{display:none;background:rgba(255,255,255,.95);border-radius:8px;margin:4px 0}
+.dropdown a{display:block;padding:10px 35px;font-size:14px;color:#333;text-decoration:none;cursor:pointer}
+.dropdown a:hover{background:#f2f4f8}
+
+.logout{color:#c0392b;margin:4px 10px;padding:12px 20px;font-weight:bold;border-radius:8px;cursor:pointer}
+.logout:hover{background:rgba(0,0,0,.05)}
+
+/* Main */
+.main{flex:1;padding:25px;display:flex;flex-direction:column}
+
+/* Topbar */
+.topbar{
+background:#fff;border-radius:16px;padding:18px 22px;
+box-shadow:0 6px 16px rgba(0,0,0,.12);
+display:flex;justify-content:space-between;align-items:center;
+border-left:6px solid #ff9933;
+}
+.topbar h2{color:#0a2a66}
+
+/* Cards */
+.cards{
+margin-top:25px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:22px;
+}
+.card{
+background:#fff;border-radius:20px;padding:22px;
+box-shadow:0 6px 14px rgba(0,0,0,.12);
+border-top:5px solid #138808;
+}
+.card h3{color:#0a2a66;margin-bottom:8px}
+.card p{font-size:22px;font-weight:bold;color:#c0392b}
+
+/* Work area */
+.work-area{
+margin-top:30px;background:#fff;border-radius:22px;padding:30px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+min-height:350px;border-left:6px solid #ff9933;
+}
+.work-area h3{color:#0a2a66;margin-bottom:15px}
+
+/* Services grid */
+.services{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:20px;
+}
+.service-card{
+background:#fff;border-radius:16px;padding:18px;text-align:center;
+box-shadow:0 4px 12px rgba(0,0,0,.12);
+cursor:pointer;transition:.3s;
+}
+.service-card:hover{transform:translateY(-5px)}
+.service-card img{height:40px;margin-bottom:8px}
+.service-card p{font-weight:bold;color:#0a2a66}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+<div class="brand">Hamara Suvidha Kendra</div>
+
+<div class="menu">
+<div class="menu-item" onclick="showDashboard()">Dashboard</div>
+
+<div class="menu-item" onclick="toggleMenu('service')">Services ▾</div>
+<div class="dropdown" id="service">
+<a onclick="banking()">Banking Services</a>
+<a onclick="recharge()">Recharge & Bill Payment</a>
+<a onclick="registration()">Registration Services</a>
+<a onclick="filing()">Filing Services</a>
+<a onclick="government()">Government Services</a>
+</div>
+
+<div class="menu-item" onclick="toggleMenu('reports')">Reports ▾</div>
+<div class="dropdown" id="reports">
+<a onclick="simplePage('Transaction Report')">Transaction Report</a>
+</div>
+
+<div class="menu-item" onclick="toggleMenu('funds')">Funds ▾</div>
+<div class="dropdown" id="funds">
+<a onclick="simplePage('Fund Request')">Fund Request</a>
+</div>
+
+<div class="menu-item" onclick="toggleMenu('support')">Support ▾</div>
+<div class="dropdown" id="support">
+<a onclick="simplePage('Raise Ticket')">Raise Ticket</a>
+</div>
+
+<div class="menu-item" onclick="toggleMenu('settings')">Settings ▾</div>
+<div class="dropdown" id="settings">
+<a onclick="simplePage('Profile Settings')">Profile</a>
+</div>
+
+<div class="logout">Logout</div>
+</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<div class="topbar">
+<h2>Agent Dashboard</h2>
+<span>Welcome to Hamara Suvidha Kendra</span>
+</div>
+
+<div class="cards">
+<div class="card"><h3>Total Transactions</h3><p>0</p></div>
+<div class="card"><h3>Total Work</h3><p>0</p></div>
+<div class="card"><h3>Wallet Balance</h3><p>₹0</p></div>
+<div class="card"><h3>Today's Report</h3><p>0</p></div>
+</div>
+
+<div class="work-area" id="workArea">
+<h3>Dashboard</h3>
+<p>👉 Kisi service pe click karo.</p>
+</div>
+
+</div>
+</div>
+
+<script>
+function toggleMenu(id){
+let el=document.getElementById(id);
+el.style.display=(el.style.display==="block")?"none":"block";
+}
+
+function showDashboard(){
+document.getElementById("workArea").innerHTML="<h3>Dashboard</h3><p>👉 Welcome Agent.</p>";
+}
+
+function simplePage(title){
+document.getElementById("workArea").innerHTML=`<h3>${title}</h3><p>👉 Yahan ${title} ka kaam aayega.</p>`;
+}
+
+/* REDIRECT SYSTEM */
+function goTo(url){
+window.open(url,"_blank");
+}
+
+/* SERVICES */
+
+function banking(){
+document.getElementById("workArea").innerHTML=`
+<h3>Banking Services</h3>
+<div class="services">
+<div class="service-card" onclick="window.location.href='cs.html'"><img src="aeps.png"><p>Money Deposit</p></div>
+<div class="service-card" onclick="goTo('https://example.com')"><img src="withdraw.png"><p>Money Withdrawal</p></div>
+<div class="service-card" onclick="goTo('https://example.com')"><img src="transfer.png"><p>Money Transfer</p></div>
+<div class="service-card" onclick="window.location.href='cs.html'"><img src="aeps.png"><p>Balance Enquiry</p></div>
+<div class="service-card" onclick="window.location.href='cs.html'"><img src="aeps.png"><p>Mini Statement</p></div>
+<div class="service-card" onclick="goTo('https://retail.sbi.bank.in/vkyc/vkyclanding.htm')"><img src="sbi.png"><p>SBI Savings Account</p></div>
+<div class="service-card" onclick="goTo('https://digital.jkbank.com/JKBAOPortal/components/viewer/viewform.jsp?callFrom=NewUser&WD_SID=e938e6d0-51e1-4b27-a3a2-96bcc041141c&WD_RID=')"><img src="jk.png"><p>JK Bank Savings Account</p></div>
+<div class="service-card" onclick="goTo('https://digitalbanking.pnb.bank.in/Savings/components/viewer/viewform.jsp?callFrom=NewUser&WD_SID=6a6a20d8-d2c5-4bfe-abf0-e8aa8cda6255&WD_RID=dca00951-0269-4543-ac14-f13899bd7411')"><img src="pnb.png"><p>PNB Savings Account</p></div>
+<div class="service-card" onclick="goTo('https://applyonline.hdfcbank.com/savings-account/insta-savings/open-instant-savings-account-online.html?LGCode=Mktg&icid=website_organic_herobanner_savingsaccounts%3Abanner%3Aopeninstantly#nbb')"><img src="hdfc.png"><p>HDFC Savings Account</p></div>
+<div class="service-card" onclick="goTo('https://campaigns.icicibank.com/casa/3in1Account/main/index.html?utm_source=Internal&utm_medium=website&utm_campaign=Savings%2BAccount%2Bmain%2Bpage&ITM=nli_savingsAccount_accounts_savingsAccount_productPageHeroBanner_1CTA_CMS_apply_CAMPAIGNS')"><img src="icici.png"><p>ICICI Savings Account</p></div>
+<div class="service-card" onclick="goTo('https://savingaccount.unionbankofindia.bank.in/')"><img src="uni.png"><p>Union Bank Savings Account</p></div>
+<div class="service-card" onclick="goTo('https://leap.axis.bank.in/verification?query=5ee36547c0ce0dd6c0a2812d&_gl=1*kz1zhl*_gcl_au*NjUyODQ3MzM4LjE3Njg0MDE2MTg.*_ga*MzI3Mzc2MTgzLjE3Njg0MDEwNDY.*_ga_CH41PE7401*czE3Njg0MDE5NzYkbzEkZzEkdDE3Njg0MDE5OTAkajQ2JGwwJGgxMDMxMjM0NzM0&utm_cta=homepage-placeholder&utm_medium=website-megamenu&utm_source=website')"><img src="axis.png"><p>Axis Bank Savings Account</p></div>
+<div class="service-card" onclick="goTo('https://tabit.bankofbaroda.com/BarodaInstaClick/#/savings/registration')"><img src="bob.png"><p>BOB Savings Account</p></div>
+</div>`;
+}
+
+function recharge(){
+document.getElementById("workArea").innerHTML=`
+<h3>Recharge & Bill Payment</h3>
+<div class="services">
+<div class="service-card" onclick="window.location.href='cs.html'"><img src="aeps.png"><p>Mobile Recharge</p></div>
+<div class="service-card" onclick="window.location.href='cs.html'"><img src="aeps.png"><p>DTH Recharge</p></div>
+<div class="service-card" onclick="goTo('https://example.com')"><img src="electricity.png"><p>Electricity Bill</p></div>
+<div class="service-card" onclick="goTo('https://example.com')"><img src="gas.png"><p>Gas Bill</p></div>
+<div class="service-card" onclick="goTo('https://example.com')"><img src="water.png"><p>Water Bill</p></div>
+</div>`;
+}
+
+function registration(){
+document.getElementById("workArea").innerHTML=`
+<h3>Registration Services</h3>
+<div class="services">
+<div class="service-card" onclick="goTo('https://reg.gst.gov.in/registration/')"><img src="gstr.png"><p>GST Registration</p></div>
+<div class="service-card" onclick="goTo('https://www.registerkaro.in/ads/one-person-company?utm_source=google&utm_campaign=20665875788&utm_medium=ad&utm_content=732146806319&utm_term=one%20person%20company%20registration&utm_adgroup=152510108297&network=g&device=c&placement_site=&placement_category=&ad_position=&devic_model=&gad_source=1&gad_campaignid=20665875788&gbraid=0AAAAAoJc0GamlR7_34Con3G5vl-4VyLHn&gclid=CjwKCAiAmp3LBhAkEiwAJM2JUNTDzVEq8FYlD9FbD1ma8RiKV2L0qaP368_uh95sa1TDuHZWiFJSHhoCA9gQAvD_BwE')"><img src="oc.png"><p>One Person Company</p></div>
+<div class="service-card" onclick="goTo('https://foscos.fssai.gov.in/apply-for-lic-and-reg')"><img src="fssai.png"><p>FSSAI</p></div>
+<div class="service-card" onclick="goTo('https://razorpay.com/rize/company-registration/campaign?utm_source=google&utm_medium=cpc&utm_campaign=RRize-RPPerf-GSearch-Prospect-AllDevices-WebsiteTraffic-NB-Registration-020823-Clicks-India_IncorpTypes&utm_adgroup=Rize-Registration-Pvt-Ltd-Exact+Phrase&utm_content=rize-pvt_ltd-120625-New&utm_term=private%20limited%20company%20registration&utm_gclid=&utm_campaignID=&utm_adgroupID=&utm_adID=&utm_network=&utm_device=&gad_source=1&gad_campaignid=20412529851&gbraid=0AAAAADdXWPp1UZUdQrXyrFFJyTNemlBYv&gclid=CjwKCAiAmp3LBhAkEiwAJM2JUOvEykCl9DsHFavR4-tyQIxJ8y-MKp_EH9P719Vwu5Ij9MUDrTxsPBoCY-8QAvD_BwE')"><img src="pvt.png"><p>PVT. LTD.</p></div>
+</div>`;
+}
+
+function filing(){
+document.getElementById("workArea").innerHTML=`
+<h3>Filing Services</h3>
+<div class="services">
+<div class="service-card" onclick="goTo('https://www.incometax.gov.in/iec/foportal/')"><img src="it.png"><p>ITR Filing</p></div>
+<div class="service-card" onclick="goTo('https://services.gst.gov.in/services/quicklinks/registration')"><img src="gstr.png"><p>GST - Returm</p></div>
+<div class="service-card" onclick="goTo('https://www.incometax.gov.in/iec/foportal/')"><img src="it.png"><p>TDS Filing</p></div>
+</div>`;
+}
+
+function government(){
+document.getElementById("workArea").innerHTML=`
+<h3>Government Services</h3>
+<div class="services">
+<div class="service-card" onclick="goTo('https://register.eshram.gov.in/#/user/self')"><img src="eshrm.png"><p>E-Shram</p></div>
+<div class="service-card" onclick="goTo('https://voters.eci.gov.in/')"><img src="voter.png"><p>Voter Card</p></div>
+<div class="service-card" onclick="goTo('https://www.passportindia.gov.in/psp')"><img src="pass.png"><p>Passport</p></div>
+<div class="service-card" onclick="goTo('https://beneficiary.nha.gov.in/')"><img src="ayushman.png"><p>Ayushman Card Download</p></div>
+<div class="service-card" onclick="goTo('https://abha.abdm.gov.in/abha/v3/register/aadhaar')"><img src="abha.png"><p>Abha Card</p></div>
+<div class="service-card" onclick="goTo('https://abha.abdm.gov.in/abha/v3/register/aadhaar')"><img src="labourjk.png"><p>Labour Card J&K</p></div>
+<div class="service-card" onclick="goTo('https://uidai.gov.in/en/')"><img src="adhar.png"><p>Adhaar Related Work</p></div>
+<div class="service-card" onclick="goTo('https://udyamregistration.gov.in/Government-India/Ministry-MSME-registration.htm')"><img src="udhyam.png"><p>Udhyam Certificate</p></div>
+<div class="service-card" onclick="goTo('https://onlineservices.proteantech.in/paam/endUserRegisterContact.html')"><img src="pan Card.png"><p>Pan Card</p></div>
+<div class="service-card" onclick="goTo('https://pmkisan.gov.in/RegistrationFormupdated.aspx')"><img src="Kissan.png"><p>Kisan Registration</p></div>
+<div class="service-card" onclick="goTo('https://onlineservices.proteantech.in/paam/endUserRegisterContact.html')"><img src="pan Card.png"><p>Pan Correction</p></div>
+<div class="service-card" onclick="goTo('https://sarathi.parivahan.gov.in/sarathiservice/stateSelection.do')"><img src="liscence.png"><p>Liscence Related Work</p></div>
+<div class="service-card" onclick="goTo('https://parivahan.gov.in/en/content/vehicle-related-services')"><img src="vrw.png"><p>Vehicle Related Work</p></div>
+<div class="service-card" onclick="goTo('https://sarathi.parivahan.gov.in/sarathiservice/stateSelection.do')"><img src="dsch.png"><p>Driving School Apply</p></div>
+<div class="service-card" onclick="goTo('not available')"><img src="adhar.png"><p>Aadhar Centre Apply</p></div>
+<div class="service-card" onclick="goTo('https://example.com')"><img src="edistrict.png"><p>e-districtA&N Island</p></div>
+<div class="service-card" onclick="goTo('https://eservice.arunachal.gov.in/loginWindow.do')"><img src="edistrict.png"><p>e-district AP</p></div>
+<div class="service-card" onclick="goTo('https://eservice.arunachal.gov.in/loginWindow.do')"><img src="edistrict.png"><p>e-district Arunachal</p></div>
+<div class="service-card" onclick="goTo('https://edistrict.assam.gov.in/eDistrict/')"><img src="edistrict.png"><p>e-district Assam</p></div>
+<div class="service-card" onclick="goTo('https://example.com')"><img src="edistrict.png"><p>e-district Bihar</p></div>
+<div class="service-card" onclick="goTo('http://chdservices.gov.in/')"><img src="edistrict.png"><p>e-district Chandigarh</p></div>
+<div class="service-card" onclick="goTo('https://cgedistrict.cgstate.gov.in/newCitizenLogin.do?lang=en')"><img src="edistrict.png"><p>e-district Chattisgarh</p></div>
+<div class="service-card" onclick="goTo('https://example.com')"><img src="edistrict.png"><p>e-district Dadra ,Nagar</p></div>
+<div class="service-card" onclick="goTo('https://edistrict.delhigovt.nic.in/Account/Login')"><img src="edistrict.png"><p>e-district Dehli</p></div>
+<div class="service-card" onclick="goTo('https://goaonline.gov.in/Public/Login')"><img src="edistrict.png"><p>e-district Goa</p></div>
+<div class="service-card" onclick="goTo('https://example.com')"><img src="edistrict.png"><p>e-district Gujarat</p></div>
+<div class="service-card" onclick="goTo('https://example.com')"><img src="edistrict.png"><p>e-district Haryana</p></div>
+<div class="service-card" onclick="goTo('https://himseva.hp.gov.in/pages/staticSite/new_home.xhtml#')"><img src="edistrict.png"><p>e-district HP</p></div>
+<div class="service-card" onclick="goTo('https://janparichay.meripehchaan.gov.in/v1/pehchaan/login.html?service=passive&active=true&rm_5=false&continue=https%3A%2F%2Fjan_com%2Fmail%2F&pp=1&scc=1&lmpl=default&ltmplcache=2&emr=1&osid=1&flowName=GlifWebSignIn&flowEntry=ServiceLogin&sid=JanSugamJK&v=2.0&lang=&urlid=bda7e6ac-ef82-4ff1-a5c7-6b87fae0f209')"><img src="edistrict.png"><p>e-district J&K</p></div>
+<div class="service-card" onclick="goTo('https://jharsewa.jharkhand.gov.in/loginWindow.do')"><img src="edistrict.png"><p>e-district Jharkhand</p></div>
+<div class="service-card" onclick="goTo('https://example.com')"><img src="edistrict.png"><p>e-district Karnataka</p></div>
+<div class="service-card" onclick="goTo('https://edistrict.kerala.gov.in/edportalsignin.jsp?lang=en')"><img src="edistrict.png"><p>e-district Kerela</p></div>
+<div class="service-card" onclick="goTo('https://eseva.ladakh.gov.in/home')"><img src="edistrict.png"><p>e-district Ladakh</p></div>
+<div class="service-card" onclick="goTo('https://example.com')"><img src="edistrict.png"><p>e-district Lakshadweep</p></div>
+<div class="service-card" onclick="goTo('https://www.mpedistrict.gov.in/MPL/Login.aspx')"><img src="edistrict.png"><p>e-district MP</p></div>
+<div class="service-card" onclick="goTo('https://example.com')"><img src="edistrict.png"><p>e-district Maharashtra</p></div>
+<div class="service-card" onclick="goTo('https://epramaan.meripehchaan.gov.in/auth/saml/processSSORequest.do')"><img src="edistrict.png"><p>e-district Manipur</p></div>
+<div class="service-card" onclick="goTo('https://megedistrict.gov.in/loginWindow.do')"><img src="edistrict.png"><p>e-district Meghalaya</p></div>
+<div class="service-card" onclick="goTo('https://example.com')"><img src="edistrict.png"><p>e-district Mizoram</p></div>
+<div class="service-card" onclick="goTo('https://example.com')"><img src="edistrict.png"><p>e-district Nagaland</p></div>
+<div class="service-card" onclick="goTo('https://example.com')"><img src="edistrict.png"><p>e-district Odisha</p></div>
+
+</div>`;
+}
+</script>
+
+</body>
+</html>

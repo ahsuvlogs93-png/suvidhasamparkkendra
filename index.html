@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital India – Hamara Suvidha Kendra</title>
+<style>
+/* Reset & base */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{background:#f3f6fb;color:#1e1e1e;line-height:1.7}
+a{text-decoration:none;color:inherit}/* Notice bar (scrolling) */ 
+.notice-bar{background:#c0392b;color:#fff;text-align:center;padding:10px;font-weight:bold;font-size:14px} 
+.notice-bar marquee{font-weight:bold}
+
+/* Header */ 
+header{background:linear-gradient(90deg,#ff9933,#ffffff,#138808);box-shadow:0 3px 10px rgba(0,0,0,.15);position:sticky;top:0;z-index:999} 
+.topbar{max-width:1300px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:10px 20px} 
+.brand{display:flex;align-items:center;gap:12px;font-weight:bold;font-size:20px;color:#000} 
+.brand img{height:42px} 
+nav ul{list-style:none;display:flex;gap:18px;align-items:center} 
+nav ul li{position:relative} 
+nav ul li a{text-decoration:none;color:#000;font-weight:600;padding:6px 10px;border-radius:6px} 
+nav ul li a:hover{background:rgba(0,0,0,.05)} 
+.dropdown{display:none;position:absolute;top:36px;left:0;background:#fff;min-width:240px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,.25);overflow:hidden} 
+.dropdown a{display:block;padding:10px 14px;color:#111;font-weight:500} 
+.dropdown a:hover{background:#f2f4f8} 
+nav ul li:hover .dropdown{display:block} 
+.auth-btns a{margin-left:8px;padding:8px 18px;border-radius:20px;text-decoration:none;font-weight:bold;font-size:14px} 
+.auth-btns .register{background:#0a7cff;color:#fff} 
+.auth-btns .login{border:2px solid #0a7cff;color:#0a7cff}
+
+/* Hero section */ 
+.hero{height:460px;background:linear-gradient(120deg,#dde6f7,#ffffff);display:flex;align-items:center;justify-content:center;font-size:32px;color:#555;font-weight:bold}
+
+/* Sections */ 
+section{padding:80px 20px} 
+.container{max-width:1250px;margin:auto} 
+.section-title{text-align:center;font-size:32px;font-weight:bold;margin-bottom:16px;color:#0a2a66} 
+.section-sub{text-align:center;max-width:900px;margin:0 auto 40px;font-size:16px;color:#444}
+
+/* About */ 
+.about-box{background:#fff;border-radius:26px;padding:45px;box-shadow:0 8px 22px rgba(0,0,0,.1);text-align:center}
+
+/* Services sections */ 
+.service-section{border-radius:30px;padding:60px 35px;margin-top:50px} 
+.banking{background:linear-gradient(135deg,#e8f2ff,#ffffff)} 
+.recharge{background:linear-gradient(135deg,#eaffea,#ffffff)} 
+.registration{background:linear-gradient(135deg,#fff4e5,#ffffff)} 
+.govt{background:linear-gradient(135deg,#f0ecff,#ffffff)} 
+.travel{background:linear-gradient(135deg,#eaf9ff,#ffffff)} 
+.service-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px} 
+.service-box{background:#fff;border-radius:22px;padding:22px;text-align:center;box-shadow:0 6px 14px rgba(0,0,0,.12);transition:.3s} 
+.service-box:hover{transform:translateY(-6px)} 
+.service-box img{height:48px;margin-bottom:12px} 
+.service-box span{display:block;font-weight:bold;font-size:15px} 
+.service-box small{display:block;margin-top:4px;color:#c0392b;font-weight:bold}
+
+/* Transparency section */ 
+.transparency{background:#ffffff} 
+.trans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;margin-top:40px} 
+.trans-box{background:#f7f9fd;border-radius:24px;padding:28px;text-align:center;box-shadow:0 6px 14px rgba(0,0,0,.12)} 
+.trans-box h3{color:#0a7cff;margin-bottom:8px}
+
+/* How to open */ 
+.howto{background:#ffffff;border-top:6px solid #138808} 
+.how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:28px} 
+.how-box{background:#f6f8fc;border-radius:26px;padding:32px;text-align:center;box-shadow:0 6px 14px rgba(0,0,0,.15)} 
+.how-box img{height:60px;margin-bottom:12px}
+
+/* FAQ */ 
+.faq{background:#f3f6fb} 
+.faq-item{background:#fff;border-radius:18px;padding:18px;margin-bottom:12px;box-shadow:0 4px 10px rgba(0,0,0,.1)} 
+.faq-item h4{color:#0a2a66}
+
+/* Disclaimer */ 
+.disclaimer{background:#fffbe6;border-top:4px solid #ff9800}
+
+/* Quick links */ 
+.quick-links{text-align:center;margin-top:40px} 
+.quick-links a{display:inline-block;margin:8px 12px;color:#0a7cff;text-decoration:none;font-weight:bold}
+
+/* Footer */ 
+footer{background:#1f2a44;color:#fff;padding:50px 20px;margin-top:60px} 
+.footer-grid{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px} 
+footer h3{margin-bottom:10px} 
+footer a{display:block;color:#dcdcdc;text-decoration:none;margin:4px 0;font-size:14px} 
+footer a:hover{color:#fff} 
+.copy{text-align:center;margin-top:25px;color:#ccc;font-size:13px} 
+</style>
+</head>
+<body id="home">
+<div class="notice-bar">
+<marquee>⚠️ Hamara Suvidha Kendra ab final stage me hai! Jab ready hoga, agents apne customers ka govt, travel, aur banking ka kaam kar sakte hain. Saare services transparent aur legal honge.</marquee>
+</div>
+
+<header>
+<div class="topbar">
+<div class="brand"><img src="gandhi-glasses.png"> <span>Digital India | Hamara Suvidha Kendra</span></div>
+<nav>
+<ul>
+<li><a href="#home">Home</a></li>
+<li><a href="javascript:void(0)">e‑Banking</a><div class="dropdown"><a>Not available yet</a></div></li>
+<li><a href="javascript:void(0)">Bill Payment</a><div class="dropdown"><a>Not available yet</a></div></li>
+<li><a href="javascript:void(0)">Registration & Tax Filing</a>
+<div class="dropdown">
+<a>GST Registration</a><a>Pvt Ltd Registration</a><a>FSSAI Registration</a><a>Tax Registration</a><a>Add / Remove Partner</a><a>One Person Company</a><a>Section B Company</a><a>GST Return</a><a>TDS Return</a><a>Income Tax Return</a><a>GST Correction</a>
+</div></li>
+<li><a href="javascript:void(0)">Travel</a><div class="dropdown"><a>Train IRCTC (Coming Soon)</a><a>Bus Booking</a><a>Hotel Booking</a><a>Flight Booking</a></div></li>
+</ul>
+</nav>
+
+<!-- ✅ Updated buttons with href -->
+<div class="auth-btns">
+<a class="register" href="register.php">Registration</a>
+<a class="login" href="login.php">Login</a>
+</div>
+
+</div>
+</header>
+
+<div class="hero">
+    <img src="banner.png"
+         style="width:100%;height:99%;margin-top:-0.000000000001px;object-fit:cover;">
+  </div>
+
+<section id="about">
+<div class="container">
+<h2 class="section-title">About Hamara Suvidha Kendra</h2>
+<p class="section-sub">Transparency, awareness aur trust par based ek digital initiative.</p>
+<div class="about-box">
+<p>Hamara Suvidha Kendra ka aim hai logon ko fake portals aur jhooti guarantees se bachana. Jab ye portal final hoga, agents apne customers ka govt, travel aur banking ka kaam kar sakte hain.</p>
+</div>
+</div>
+</section>
+
+<!-- Services sections: banking, recharge, registration, govt, travel (same coloring as before) -->
+<section class="service-section banking"><div class="container"><h2 class="section-title">Banking Services</h2><div class="service-grid"><div class="service-box"><img src="icon.png"><span>AEPS</span><small>Coming Soon</small></div><div class="service-box"><img src="icon.png"><span>Money Transfer</span><small>Coming Soon</small></div></div></div></section>
+
+<section class="service-section recharge"><div class="container"><h2 class="section-title">Recharge & Bill Payment</h2><div class="service-grid"><div class="service-box"><img src="icon.png"><span>Mobile Recharge</span><small>Coming Soon</small></div><div class="service-box"><img src="icon.png"><span>DTH</span><small>Coming Soon</small></div></div></div></section>
+
+<section class="service-section registration"><div class="container"><h2 class="section-title">Registration & Tax Filing</h2><div class="service-grid"><div class="service-box"><img src="icon.png"><span>GST</span><small>Coming Soon</small></div></div></div></section>
+
+<section class="service-section govt"><div class="container"><h2 class="section-title">Government Services</h2><div class="service-grid"><div class="service-box"><img src="icon.png"><span>E‑Shram</span><small>Coming Soon</small></div></div></div></section>
+
+<section class="service-section travel"><div class="container"><h2 class="section-title">Travel Services</h2><div class="service-grid"><div class="service-box"><img src="icon.png"><span>Train</span><small>Coming Soon</small></div></div></div></section>
+
+<section class="howto"><div class="container"><h2 class="section-title">How to Open Hamara Suvidha Kendra</h2>
+<div class="how-grid">
+<div class="how-box"><img src="step1.png"><p>First click on the<br><b>Registration option</b></p></div>
+<div class="how-box"><img src="step2.png"><p>Fillup the form and<br><b>Document details</b></p></div>
+<div class="how-box"><img src="step3.png"><p>Make payment and recieve<br><b>agent id</b></p></div>
+<div class="how-box"><img src="step4.png"><p>Start earning with<br><b>Hamara Suvidha Kendra</b></p></div>
+</div></div></section>
+
+<footer>
+<div class="footer-grid">
+<div><h3>Hamara Suvidha Kendra</h3><p style="font-size:14px;color:#ccc">Transparency based digital initiative.</p></div>
+<div><h3>Quick Links</h3><a href="#home">Home</a><a href="#about">About</a><a href="#registration">Services</a></div>
+<div><h3>Important</h3><a>Disclaimer</a><a>Privacy Policy</a><a>Terms</a></div>
+<div><h3>Support</h3><a>Help Center</a><a>Contact</a></div>
+</div>
+<div class="copy">© 2026 Hamara Suvidha Kendra. All rights reserved.</div>
+</footer>
+
+</body>
+</html>

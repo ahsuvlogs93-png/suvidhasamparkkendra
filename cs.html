@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Service Temporarily Unavailable – Suvidha Sampark Kendra</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+
+body{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#f3f6fb,#ffffff);
+}
+
+.box{
+background:#fff;
+max-width:520px;
+width:90%;
+padding:40px 30px;
+border-radius:24px;
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+text-align:center;
+border-top:6px solid #ff9933;
+border-bottom:6px solid #138808;
+animation:fadeIn .8s ease;
+}
+
+.logo{
+font-size:20px;
+font-weight:bold;
+color:#0a2a66;
+margin-bottom:15px;
+}
+
+.icon{
+font-size:70px;
+margin-bottom:10px;
+}
+
+h2{
+color:#c0392b;
+margin-bottom:10px;
+}
+
+p{
+color:#444;
+font-size:15px;
+line-height:1.6;
+margin-bottom:18px;
+}
+
+.notice{
+background:#f7f9fd;
+padding:14px;
+border-radius:12px;
+font-size:14px;
+color:#0a2a66;
+margin-bottom:22px;
+border-left:4px solid #ff9933;
+}
+
+button{
+padding:12px 24px;
+border:none;
+border-radius:30px;
+background:#0a2a66;
+color:#fff;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+background:#08307a;
+transform:translateY(-2px);
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<div class="logo">Suvidha Sampark Kendra</div>
+
+<div class="icon">⚠️</div>
+
+<h2>Service Temporarily Unavailable</h2>
+
+<p>
+This service is currently unavailable due to system upgrades and technical improvements.
+</p>
+
+<div class="notice">
+Our technical team is actively working on this service to make it faster, more secure, and more reliable for you.
+</div>
+
+<p>
+We request you to please try again later.  
+This service will be available very soon on the Suvidha Sampark Kendra portal.
+</p>
+
+<button onclick="goBack()">← Back to Dashboard</button>
+
+</div>
+
+<script>
+function goBack(){
+  window.history.back();
+}
+</script>
+
+</body>
+</html>
